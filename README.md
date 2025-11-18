@@ -8,5 +8,9 @@ JavaScript & TypeScript libraries for EvoNext.
 ## NPM Packages
 
 1. evonext
-2. @evonext/platform
-3. @evonext/utils
+2. @evonext/app
+3. @evonext/crypto
+4. @evonext/message
+5. @evonext/platform
+6. @evonext/utils
+7. @evonext/zk
