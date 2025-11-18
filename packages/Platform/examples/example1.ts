@@ -1,5 +1,5 @@
 /* Import modules. */
-import { example1 } from '../index.js' // use @evonext/platform in production
+import { example1 } from '../src/index.js' // use @evonext/platform in production
 
 ;(async () => {
     console.log('Example1')
