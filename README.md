@@ -1,6 +1,6 @@
-# EvoNext Software Development Kit (SDK)
+# EvoNext JavaScript & TypeScript Monorepo
 
-### https://evonext.app/sdk
+### https://evonext.app/libs
 
 JavaScript & TypeScript libraries for EvoNext.
 
