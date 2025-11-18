@@ -1,7 +1,7 @@
 {
   "name": "evonext",
   "version": "25.11.15",
-  "description": "General library for EvoNext application development.",
+  "description": "EvoNext is a lightweight TypeScript library for building applications on the EvoNext ecosystem.",
   "author": "EvoNext Team",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -43,6 +43,6 @@
   "keywords": [
     "evonext",
     "dash",
-    "dpp"
+    "platform"
   ]
 }
