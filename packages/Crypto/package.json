@@ -1,0 +1,22 @@
+{
+  "name": "@evonext/crypto",
+  "version": "24.9.5",
+  "description": "Suite of useful cryptographic functions for decentralized applications.",
+  "main": "index.js",
+  "repository": "https://github.com/sansbank/evonext-js",
+  "author": "EvoNext developers",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@ethersproject/random": "5.7.0",
+    "@evonext/script": "24.7.15",
+    "@evonext/utils": "24.7.15",
+    "bn.js": "5.2.1",
+    "bs58": "6.0.0",
+    "crypto-js": "4.2.0",
+    "elliptic": "6.5.5",
+    "lodash": "4.17.21",
+    "scrypt-js": "3.0.1",
+    "secure-ls": "1.2.6"
+  }
+}
