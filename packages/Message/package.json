@@ -1,0 +1,16 @@
+{
+  "name": "@evonext/message",
+  "version": "24.10.1",
+  "description": "A very simple, crypto-friendly messaging library.",
+  "main": "index.js",
+  "repository": "https://github.com/sansbank/evonext-js",
+  "author": "EvoNext developers",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@evonext/crypto": "24.9.5",
+    "@evonext/hdnode": "24.10.1",
+    "@evonext/utils": "24.7.15",
+    "events": "3.3.0"
+  }
+}
