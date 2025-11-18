@@ -1,0 +1,8 @@
+# Source files
+src/
+# Config files
+.gitignore
+tsconfig.json
+tsup.config.ts
+# Dev dependencies
+node_modules/

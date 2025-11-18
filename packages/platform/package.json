@@ -1,0 +1,46 @@
+{
+  "name": "@evonext/platform",
+  "version": "25.11.15",
+  "description": "Platform library for EvoNext, providing shared types, utilities, and services.",
+  "author": "EvoNext Team",
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "npm run build -- --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "pshenmic-dpp": "^0.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sansbankdao/evonext-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sansbankdao/evonext-js/issues"
+  },
+  "homepage": "https://github.com/sansbankdao/evonext-js#readme",
+  "keywords": [
+    "evonext",
+    "dash",
+    "dpp"
+  ]
+}
