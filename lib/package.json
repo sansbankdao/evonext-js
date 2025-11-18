@@ -23,12 +23,13 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
-    "pshenmic-dpp": "^0.24.0"
+    "dash-platform-sdk": "1.3.0-dev.10",
+    "pshenmic-dpp": "1.1.0-dev.7"
   },
   "devDependencies": {
-    "@types/node": "^20.12.12",
-    "tsup": "^8.0.2",
-    "typescript": "^5.4.5"
+    "@types/node": "24.10.1",
+    "tsup": "8.5.1",
+    "typescript": "5.9.3"
   },
   "repository": {
     "type": "git",
