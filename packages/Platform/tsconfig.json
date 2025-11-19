@@ -8,13 +8,29 @@
       "DOM"
     ],
     "strict": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "paths": {
+      "@evonext/platform/*": ["src/*"]
+    }
   },
   "include": [
-    "src"
+    "src",
+    "tests"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

@@ -1,7 +1,7 @@
 {
   "name": "@evonext/platform",
   "version": "25.11.15",
-  "description": "Platform library for EvoNext, providing shared types, utilities, and services.",
+  "description": "Platform library for EvoNext, providing shared types, utilities, and services for Dash Platform integration.",
   "author": "EvoNext Team",
   "license": "MIT",
   "main": "./dist/index.js",
@@ -17,10 +17,19 @@
   "files": [
     "dist"
   ],
+  "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
     "dev": "npm run build -- --watch",
-    "prepublishOnly": "npm run build"
+    "clean": "rm -rf dist",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write src tests",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "prepublishOnly": "npm run clean && npm run build && npm run test",
+    "prepare": "husky install"
   },
   "dependencies": {
     "dash-platform-sdk": "1.3.0-dev.10",
@@ -28,9 +37,21 @@
   },
   "devDependencies": {
     "@types/node": "24.10.1",
+    "@vitest/coverage-v8": "^2.1.3",
+    "eslint": "^9.11.1",
+    "husky": "^9.1.7",
+    "jsdom": "^25.0.1",
+    "prettier": "^3.3.3",
     "tsup": "8.5.1",
     "tsx": "4.20.6",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "vitest": "^2.1.3"
+  },
+  "peerDependencies": {
+    "pshenmic-dpp": "*"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "repository": {
     "type": "git",
@@ -43,6 +64,8 @@
   "keywords": [
     "evonext",
     "dash",
-    "platform"
+    "platform",
+    "dpp",
+    "sdk"
   ]
 }
