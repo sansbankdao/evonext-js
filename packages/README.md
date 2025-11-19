@@ -7,9 +7,38 @@ JavaScript & TypeScript libraries for EvoNext.
 
 ## NPM Packages
 
-1. @evonext/app
-2. @evonext/crypto
-3. @evonext/message
-4. [@evonext/platform](/packages/Platform)
-5. @evonext/utils
-6. @evonext/zk
+### Applications
+
+> @evonext/app
+
+TBD...
+
+### Crypto
+
+> @evonext/crypto
+
+TBD...
+
+### Messaging
+
+> @evonext/message
+
+TBD...
+
+### Platform
+
+> [@evonext/platform](/packages/Platform)
+
+TBD...
+
+### Utilities
+
+> @evonext/utils
+
+TBD...
+
+### Zero Knowledge
+
+> @evonext/zk
+
+TBD...
