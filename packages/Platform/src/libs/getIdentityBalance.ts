@@ -3,8 +3,8 @@
 /* Initialize Web API endpoint. */
 const WEB_API_ENDPOINT = 'https://dashqt.org/v1/dapi'
 
-interface ApiResponse<T = any> {
-    result?: T
+interface ApiResponse {
+    balance?: string
     error?: {
         message: string
         type: string
@@ -12,19 +12,15 @@ interface ApiResponse<T = any> {
     }
 }
 
-interface IdentityBalanceResult {
-    balance: string
-}
-
 /**
  * Web API Query
  *
  * Wrapper for DAPI web service calls.
  */
-const queryWebAPI = async <T = any>(
+const queryWebAPI = async (
     method: string,
     params: any[]
-): Promise<ApiResponse<T>> => {
+): Promise<ApiResponse> => {
     try {
         const response = await fetch(WEB_API_ENDPOINT, {
             method: 'POST',
@@ -41,7 +37,7 @@ const queryWebAPI = async <T = any>(
             throw new Error(`HTTP error! status: ${response.status}`)
         }
 
-        const result: ApiResponse<T> = await response.json()
+        const result: ApiResponse = await response.json()
         return result
 
     } catch (error) {
@@ -59,7 +55,7 @@ const queryWebAPI = async <T = any>(
  */
 export default async (identityId: string): Promise<string | null> => {
     try {
-        const response = await queryWebAPI<IdentityBalanceResult>('get_identity_balance', [identityId])
+        const response = await queryWebAPI('get_identity_balance', [identityId])
 
         // Check for API-level errors
         if (response.error) {
@@ -69,9 +65,9 @@ export default async (identityId: string): Promise<string | null> => {
             )
         }
 
-        // Validate successful response structure
-        if (response.result && typeof response.result.balance === 'string') {
-            return response.result.balance
+        // Handle the actual response format: {balance: "12761934343"}
+        if (response && typeof response.balance === 'string') {
+            return response.balance
         }
 
         console.warn('Unexpected API response format:', response)
