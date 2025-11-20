@@ -12,10 +12,12 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "sideEffects": false,
   "scripts": {
@@ -24,7 +26,7 @@
     "clean": "rm -rf dist",
     "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write src tests",
+    "format": "prettier --write \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -32,8 +34,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "dash-platform-sdk": "1.3.0-dev.10",
-    "pshenmic-dpp": "1.1.0-dev.7"
+    "@nexajs/crypto": "24.9.5",
+    "@nexajs/utils": "24.7.15",
+    "dash-platform-sdk": "1.3.0-dev.10"
   },
   "devDependencies": {
     "@types/node": "24.10.1",
@@ -42,30 +45,34 @@
     "husky": "9.1.7",
     "jsdom": "25.0.1",
     "prettier": "3.3.3",
+    "pshenmic-dpp": "1.1.0-dev.7",
     "tsup": "8.5.1",
     "tsx": "4.20.6",
     "typescript": "5.9.3",
     "vitest": "2.1.9"
-  },
-  "peerDependencies": {
-    "pshenmic-dpp": "*"
   },
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sansbankdao/evonext-js.git"
+    "url": "https://github.com/sansbankdao/evonext-js.git",
+    "directory": "packages/platform"
   },
   "bugs": {
     "url": "https://github.com/sansbankdao/evonext-js/issues"
   },
-  "homepage": "https://github.com/sansbankdao/evonext-js#readme",
+  "homepage": "https://github.com/sansbankdao/evonext-js/tree/main/packages/platform#readme",
   "keywords": [
     "evonext",
     "dash",
     "platform",
     "dpp",
-    "sdk"
-  ]
+    "sdk",
+    "blockchain",
+    "identity"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
