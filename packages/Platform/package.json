@@ -1,18 +1,21 @@
 {
   "name": "@evonext/platform",
-  "version": "25.11.15",
-  "description": "Platform library for EvoNext, providing shared types, utilities, and services for Dash Platform integration.",
+  "version": "25.11.18",
+  "description": "Platform library for EvoNext",
   "author": "EvoNext Team",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/evonext-platform.js",
+  "module": "./dist/evonext-platform.min.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/evonext-platform.min.mjs",
+      "require": "./dist/evonext-platform.js"
     },
+    "./evonext-platform.js": "./dist/evonext-platform.js",
+    "./evonext-platform.min.js": "./dist/evonext-platform.min.js",
+    "./evonext-platform.min.mjs": "./dist/evonext-platform.min.mjs",
     "./package.json": "./package.json"
   },
   "files": [
@@ -21,16 +24,18 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --minify",
-    "dev": "npm run build -- --watch",
-    "clean": "rm -rf dist",
+    "build": "npm run build:clean && npm run build:base && npm run build:minified",
+    "build:clean": "rm -rf dist",
+    "build:base": "tsup src/index.ts --format cjs,esm --dts",
+    "build:minified": "esbuild dist/index.js --bundle --minify --sourcemap --format=iife --global-name=EvoNext --outfile=dist/evonext-platform.min.js && esbuild dist/index.mjs --bundle --minify --sourcemap --format=esm --outfile=dist/evonext-platform.min.mjs",
+    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "npm run clean && npm run build",
+    "prepublishOnly": "npm run build",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -42,6 +47,7 @@
   "devDependencies": {
     "@types/node": "24.10.1",
     "@vitest/coverage-v8": "2.1.3",
+    "esbuild": "0.27.0",
     "eslint": "9.11.1",
     "husky": "9.1.7",
     "jsdom": "25.0.1",
@@ -58,21 +64,5 @@
     "type": "git",
     "url": "https://github.com/sansbankdao/evonext-js.git",
     "directory": "packages/platform"
-  },
-  "bugs": {
-    "url": "https://github.com/sansbankdao/evonext-js/issues"
-  },
-  "homepage": "https://github.com/sansbankdao/evonext-js/tree/main/packages/platform#readme",
-  "keywords": [
-    "evonext",
-    "dash",
-    "platform",
-    "dpp",
-    "sdk",
-    "blockchain",
-    "identity"
-  ],
-  "engines": {
-    "node": ">=18.0.0"
   }
 }
