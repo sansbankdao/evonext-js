@@ -6,11 +6,18 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
+    setupFiles: ['./tests/setup.ts'], // Optional: add if you need test setup
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*.{ts,js}'],
-      exclude: ['src/**/*.d.ts']
+      exclude: [
+        'src/**/*.d.ts',
+        'src/**/*.config.ts',
+        'src/**/*.test.ts',
+        'src/**/*.spec.ts',
+        'tests/**/*'
+      ]
     }
   }
 })
