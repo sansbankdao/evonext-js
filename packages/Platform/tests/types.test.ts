@@ -1,18 +1,26 @@
-import { describe, it } from 'vitest'
-import type { PlatformConfig, PlatformError } from '../src'
+// tests/types.test.ts
+import { describe, it, expect } from 'vitest'
+import type { IIdentity, IPublicKey } from '../src/types'
 
 describe('Types', () => {
-  it('should compile without errors', () => {
-    const config: PlatformConfig = {
-      network: 'mainnet',
-      dppProvider: null
-    }
+    it('should compile without errors', () => {
+        const publicKey: IPublicKey = {
+            type: 0,
+            keyType: 'ECDSA_SECP256K1',
+            purpose: 'SIGNING',
+            securityLevel: 'MASTER',
+            contractBounds: null,
+            dataBytes: null,
+            readOnly: false,
+            disabledAt: false
+        }
 
-    const error: PlatformError = new Error('Test') as PlatformError
-    error.code = 'TEST_CODE'
-    error.details = { foo: 'bar' }
+        const identity: IIdentity = {
+            idx: 1337,
+            publicKeys: [publicKey]
+        }
 
-    expect(config).toBeDefined()
-    expect(error).toBeDefined()
-  })
+        expect(publicKey).toBeDefined()
+        expect(identity).toBeDefined()
+    })
 })
