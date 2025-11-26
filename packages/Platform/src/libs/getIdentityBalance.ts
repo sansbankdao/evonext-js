@@ -2,6 +2,15 @@
 
 type SupportedNetwork = 'testnet' | 'mainnet'
 
+interface NetworkOptions {
+    network?: SupportedNetwork
+    identityId: string
+}
+
+type GetIdentityBalanceParams =
+    | [network: SupportedNetwork, identityId: string]
+    | [options: NetworkOptions]
+
 /* Initialize Web API endpoint. */
 const WEB_API_ENDPOINT = 'https://dashqt.org/v1/dapi'
 
@@ -56,11 +65,28 @@ const queryWebAPI = async (
  * Get Identity Balance
  *
  * Queries the Web API for the balance of the given identity.
+ *
+ * Supports positional args: `getIdentityBalance(network, identityId)`
+ * Supports object arg: `getIdentityBalance({ network?: 'mainnet'|'testnet', identityId: string })`
  */
-export default async (
-    network: SupportedNetwork = 'testnet',
-    identityId: string
-): Promise<string | null> => {
+export default async (...args: GetIdentityBalanceParams): Promise<string | null> => {
+    let network: SupportedNetwork = 'testnet'
+    let identityId: string
+
+    // Handle object parameter first (takes precedence)
+    if (args.length === 1 && args[0] !== null && typeof args[0] === 'object') {
+        const options = args[0] as NetworkOptions
+        network = options.network || 'testnet'
+        identityId = options.identityId
+    } else {
+        // Handle positional arguments - require EXACTLY 2 params
+        if (args.length !== 2) {
+            throw new Error('Invalid arguments: if not using object param, exactly 2 positional params required (network, identityId)')
+        }
+        network = args[0] as SupportedNetwork
+        identityId = args[1] as string
+    }
+
     try {
         const response = await queryWebAPI(network, 'get_identity_balance', [identityId])
 
