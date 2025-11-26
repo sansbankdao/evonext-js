@@ -1,13 +1,13 @@
 // src/libs/getIdentityBalance.ts
 
-type SupportedNetwork = 'testnet' | 'mainnet'
+export type SupportedNetwork = 'testnet' | 'mainnet'
 
-interface NetworkOptions {
+export interface NetworkOptions {
     network?: SupportedNetwork
     identityId: string
 }
 
-type GetIdentityBalanceParams =
+export type GetIdentityBalanceParams =
     | [network: SupportedNetwork, identityId: string]
     | [options: NetworkOptions]
 
