@@ -19,8 +19,6 @@ import _sha512 from './src/sha512.js'
 import _signMessageHashEcdsa from './src/signMessageHashEcdsa.js'
 import _signMessageHashSchnorr from './src/signMessageHashSchnorr.js'
 import _validateSecp256k1PrivateKey from './src/validateSecp256k1PrivateKey.js'
-import _verifyMessageHashEcdsa from './src/verifyMessageHashEcdsa.js'
-import _verifyMessageHashSchnorr from './src/verifyMessageHashSchnorr.js'
 
 /* Import (local) libraries. */
 import _Base58Check from './libs/Base58Check.js'
@@ -52,8 +50,6 @@ export const sha512 = _sha512
 export const signMessageHashEcdsa = _signMessageHashEcdsa
 export const signMessageHashSchnorr = _signMessageHashSchnorr
 export const validateSecp256k1PrivateKey = _validateSecp256k1PrivateKey
-export const verifyMessageHashEcdsa = _verifyMessageHashEcdsa
-export const verifyMessageHashSchnorr = _verifyMessageHashSchnorr
 
 /* Export (local) libraries. */
 export const Base58Check = _Base58Check
@@ -124,8 +120,6 @@ EvoNext.sha512 = sha512
 EvoNext.signMessageHashEcdsa = signMessageHashEcdsa
 EvoNext.signMessageHashSchnorr = signMessageHashSchnorr
 EvoNext.validateSecp256k1PrivateKey = validateSecp256k1PrivateKey
-EvoNext.verifyMessageHashEcdsa = verifyMessageHashEcdsa
-EvoNext.verifyMessageHashSchnorr = verifyMessageHashSchnorr
 
 /* Initialize Crypto settings. */
 EvoNext.defaultNetwork = defaultNetwork
