@@ -24,19 +24,19 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "npm run build:clean && npm run build:base && npm run build:minified",
+    "build": "pnpm run build:clean && pnpm run build:base && pnpm run build:minified",
     "build:clean": "rm -rf dist",
     "build:base": "tsup src/index.ts --format cjs,esm --dts",
     "build:minified": "esbuild dist/index.js --bundle --minify --sourcemap --format=iife --global-name=EvoNext --outfile=dist/evonext-platform.min.js && esbuild dist/index.mjs --bundle --minify --sourcemap --format=esm --outfile=dist/evonext-platform.min.mjs",
     "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
     "lint": "eslint src --ext .ts",
-    "lint:fix": "npm run lint -- --fix",
+    "lint:fix": "pnpm run lint -- --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "prepublishOnly": "npm run build",
-    "prepare": "husky install"
+    "prepublishOnly": "pnpm run build && pnpm run test",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nexajs/crypto": "24.9.5",
