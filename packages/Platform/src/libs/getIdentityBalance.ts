@@ -1,5 +1,7 @@
 // src/libs/getIdentityBalance.ts
 
+type SupportedNetwork = 'testnet' | 'mainnet'
+
 /* Initialize Web API endpoint. */
 const WEB_API_ENDPOINT = 'https://dashqt.org/v1/dapi'
 
@@ -18,6 +20,7 @@ interface ApiResponse {
  * Wrapper for DAPI web service calls.
  */
 const queryWebAPI = async (
+    network: SupportedNetwork = 'testnet',
     method: string,
     params: any[]
 ): Promise<ApiResponse> => {
@@ -30,6 +33,7 @@ const queryWebAPI = async (
             body: JSON.stringify({
                 method,
                 params,
+                network,
             }),
         })
 
@@ -53,9 +57,12 @@ const queryWebAPI = async (
  *
  * Queries the Web API for the balance of the given identity.
  */
-export default async (identityId: string): Promise<string | null> => {
+export default async (
+    network: SupportedNetwork = 'testnet',
+    identityId: string
+): Promise<string | null> => {
     try {
-        const response = await queryWebAPI('get_identity_balance', [identityId])
+        const response = await queryWebAPI(network, 'get_identity_balance', [identityId])
 
         // Check for API-level errors
         if (response.error) {
