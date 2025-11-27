@@ -114,8 +114,8 @@ export default async (...args: GetIdentityBalanceParams): Promise<string | null>
             )
         }
 
-        // ✅ FIXED: Handle REAL API structure {success: true, result: {balance: "..."}}
-        const balance = response.result?.balance || response.balance
+        // ✅ FIXED: Real API = {success: true, result: {balance: "12761934343"}}
+        const balance = response.result?.balance
         if (balance && typeof balance === 'string' && balance !== '0') {
             if (!isTest) {
                 console.log(`Balance for ${identityId}: ${balance} satoshis`)
