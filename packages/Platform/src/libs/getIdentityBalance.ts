@@ -15,7 +15,16 @@ export type GetIdentityBalanceParams =
 const WEB_API_ENDPOINT = 'https://dashqt.org/v1/dapi'
 
 interface ApiResponse {
-    balance?: string
+    success?: boolean
+    method?: string
+    params?: string[]
+    network?: string
+    result?: {
+        identity?: string
+        balance?: string
+        credits?: number
+        network?: string
+    }
     error?: {
         message: string
         type: string
@@ -54,7 +63,10 @@ const queryWebAPI = async (
         return result
 
     } catch (error) {
-        console.error(`Web API query failed for ${method}:`, error)
+        const isTest = process.env.NODE_ENV === 'test' || process.env.VITEST
+        if (!isTest) {
+            console.error(`Web API query failed for ${method}:`, error)
+        }
         throw new Error(
             `API request failed for ${method}: ${error instanceof Error ? error.message : 'Unknown error'}`
         )
@@ -90,24 +102,37 @@ export default async (...args: GetIdentityBalanceParams): Promise<string | null>
     try {
         const response = await queryWebAPI(network, 'get_identity_balance', [identityId])
 
+        const isTest = process.env.NODE_ENV === 'test' || process.env.VITEST
+
         // Check for API-level errors
         if (response.error) {
-            console.error('API returned error:', response.error)
+            if (!isTest) {
+                console.error('API returned error:', response.error)
+            }
             throw new Error(
                 `API Error: ${response.error.message}${response.error.validationErrors ? ` - ${response.error.validationErrors.join(', ')}` : ''}`
             )
         }
 
-        // Handle the actual response format: {balance: "12761934343"}
-        if (response && typeof response.balance === 'string') {
-            return response.balance
+        // ✅ FIXED: Handle REAL API structure {success: true, result: {balance: "..."}}
+        const balance = response.result?.balance || response.balance
+        if (balance && typeof balance === 'string' && balance !== '0') {
+            if (!isTest) {
+                console.log(`Balance for ${identityId}: ${balance} satoshis`)
+            }
+            return balance
         }
 
-        console.warn('Unexpected API response format:', response)
+        if (!isTest) {
+            console.warn('Unexpected API response format or zero balance:', response)
+        }
         return null
 
     } catch (error) {
-        console.error(`Failed to get balance for identity ${identityId}:`, error)
+        const isTest = process.env.NODE_ENV === 'test' || process.env.VITEST
+        if (!isTest) {
+            console.error(`Failed to get balance for identity ${identityId}:`, error)
+        }
 
         // Re-throw with context for the caller to handle
         throw new Error(
