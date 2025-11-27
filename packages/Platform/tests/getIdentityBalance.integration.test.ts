@@ -1,4 +1,4 @@
-// tests/getIdentityBalance.test.ts
+// tests/getIdentityBalance.integration.test.ts
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { EvoNext } from '../src'
 
@@ -11,9 +11,21 @@ beforeEach(() => {
 
 describe('EvoNext.getIdentityBalance', () => {
     it('should work with positional args (testnet)', async () => {
+        // ✅ FIXED: Real API format {success: true, result: {balance: "..."}}
         mockFetch.mockResolvedValueOnce({
             ok: true,
-            json: () => Promise.resolve({ balance: '1000000' })
+            json: () => Promise.resolve({
+                success: true,
+                method: 'get_identity_balance',
+                params: ['mock-identity-123'],
+                network: 'testnet',
+                result: {
+                    identity: 'mock-identity-123',
+                    balance: '1000000',
+                    credits: 1000000,
+                    network: 'testnet'
+                }
+            })
         } as Response)
 
         const balance = await EvoNext.getIdentityBalance('testnet', 'mock-identity-123')
@@ -34,7 +46,18 @@ describe('EvoNext.getIdentityBalance', () => {
     it('should work with positional args (mainnet)', async () => {
         mockFetch.mockResolvedValueOnce({
             ok: true,
-            json: () => Promise.resolve({ balance: '5000000' })
+            json: () => Promise.resolve({
+                success: true,
+                method: 'get_identity_balance',
+                params: ['mock-identity-456'],
+                network: 'mainnet',
+                result: {
+                    identity: 'mock-identity-456',
+                    balance: '5000000',
+                    credits: 5000000,
+                    network: 'mainnet'
+                }
+            })
         } as Response)
 
         const balance = await EvoNext.getIdentityBalance('mainnet', 'mock-identity-456')
@@ -55,7 +78,18 @@ describe('EvoNext.getIdentityBalance', () => {
     it('should work with object param (testnet default)', async () => {
         mockFetch.mockResolvedValueOnce({
             ok: true,
-            json: () => Promise.resolve({ balance: '2500000' })
+            json: () => Promise.resolve({
+                success: true,
+                method: 'get_identity_balance',
+                params: ['mock-identity-789'],
+                network: 'testnet',
+                result: {
+                    identity: 'mock-identity-789',
+                    balance: '2500000',
+                    credits: 2500000,
+                    network: 'testnet'
+                }
+            })
         } as Response)
 
         const balance = await EvoNext.getIdentityBalance({ identityId: 'mock-identity-789' })
@@ -76,7 +110,18 @@ describe('EvoNext.getIdentityBalance', () => {
     it('should work with object param (mainnet)', async () => {
         mockFetch.mockResolvedValueOnce({
             ok: true,
-            json: () => Promise.resolve({ balance: '7500000' })
+            json: () => Promise.resolve({
+                success: true,
+                method: 'get_identity_balance',
+                params: ['mock-identity-101'],
+                network: 'mainnet',
+                result: {
+                    identity: 'mock-identity-101',
+                    balance: '7500000',
+                    credits: 7500000,
+                    network: 'mainnet'
+                }
+            })
         } as Response)
 
         const balance = await EvoNext.getIdentityBalance({
