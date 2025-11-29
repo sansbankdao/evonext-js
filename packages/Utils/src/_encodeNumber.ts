@@ -1,7 +1,7 @@
 /**
  * Encode Number
  */
-const encodeNumber = (_satoshis) => {
+const encodeNumber = (_satoshis: number): Buffer => {
     // Check if the provided satoshis is of the correct type.
     if (isNaN(_satoshis)) {
         throw `Cannot encode output value, provided satoshis '${_satoshis}' is not a number.`
@@ -19,7 +19,7 @@ const encodeNumber = (_satoshis) => {
 
     // Check if the provided satoshis is within our accepted number range.
     if (_satoshis > Math.pow(2, 53)) {
-        throw `Cannot encode output value, provided satoshis '${_satoshis}' is larger than javacripts 53bit limit.`
+        throw `Cannot encode output value, provided satoshis '${_satoshis}' is larger than javascript's 53bit limit.`
     }
 
     /* Allocate 8 bytes. */
@@ -38,4 +38,4 @@ const encodeNumber = (_satoshis) => {
 }
 
 /* Export module. */
-module.exports = encodeNumber
+export default encodeNumber
