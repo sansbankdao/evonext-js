@@ -39,8 +39,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@nexajs/crypto": "24.9.5",
-    "@nexajs/utils": "24.7.15",
+    "@evonext/crypto": "25.11.25",
+    "@evonext/utils": "25.11.25",
     "dash-platform-sdk": "1.3.0-dev.10",
     "pshenmic-dpp": "1.1.0-dev.7"
   },

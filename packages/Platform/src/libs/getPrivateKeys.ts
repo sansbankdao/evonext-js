@@ -1,25 +1,12 @@
 // src/libs/getPrivateKeys.ts
 
-/* Import modules. */
-import init, {
-    // WasmSdkBuilder,
-    derive_key_from_seed_with_path,
-    // prefetch_trusted_quorums_mainnet,
-} from './dash/wasm_sdk.js'
-import getMnemonic from './getMnemonic'
-
 /* Get Private Keys. */
 export default async (
     _currentNetwork: string,
+    _mnemonic: string,
     _identityIdx: number,
     _queryRegistry: boolean,
 ) => {
-    /* Request mnemonic. */
-    const mnemonic = await getMnemonic()
-
-    /* Initialize WASM module. */
-    await init()
-
     /* Master Authentication */
     const masterKeyPath = `m/9'/${_currentNetwork === 'mainnet' ? 5 : 1}'/5'/0'/0'/${_identityIdx}'/0'`
     const masterKey = derive_key_from_seed_with_path(

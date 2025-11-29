@@ -1,7 +1,9 @@
+// src/_decodeNumber.ts
+
 /**
  * Decode Number
  */
-const decodeNumber = (_bufferValue) => {
+const decodeNumber = (_bufferValue: Buffer) => {
     // TODO: Properly validate and error check.
 
     /* Parse the high and low value sets. */
@@ -13,4 +15,4 @@ const decodeNumber = (_bufferValue) => {
 }
 
 /* Export module. */
-module.exports = decodeNumber
+export default decodeNumber
