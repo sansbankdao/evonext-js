@@ -1,7 +1,9 @@
 // src/libs/getIdentities.ts
 
 /* Import modules. */
+// @ts-ignore
 import { hash160 } from '@evonext/crypto'
+// @ts-ignore
 import { binToHex, hexToBin } from '@evonext/utils'
 
 import getPrivateKeys from './getPrivateKeys'
