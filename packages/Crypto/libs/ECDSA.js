@@ -26,6 +26,10 @@ const _reverse = (param) => {
  */
 class ECDSA {
     constructor(_obj) {
+        // NOTE: This guard is dead code for an ES `class` — `ECDSA()` throws
+        //       before the constructor body runs, so `this instanceof ECDSA` is
+        //       always true here. It is retained because it is harmless and
+        //       changes nothing.
         if (!(this instanceof ECDSA)) {
             return new ECDSA(_obj)
         }
@@ -133,7 +137,14 @@ class ECDSA {
     }
 
     static sign(hashbuf, privkey, endian) {
-        return ECDSA().set({
+        // NOTE: `new` is REQUIRED. This module is an ES `class`, and a native
+        //       class cannot be invoked as a function ("Class constructor
+        //       ECDSA cannot be invoked without 'new'"). The calls here were
+        //       bare `ECDSA()`, which throws; both static methods therefore
+        //       failed on every call while still reporting
+        //       `typeof ECDSA.verify === 'function'`, so no type check could
+        //       catch it.
+        return new ECDSA().set({
             hashbuf: hashbuf,
             endian: endian,
             privkey: privkey
@@ -141,7 +152,8 @@ class ECDSA {
     }
 
     static verify(hashbuf, sig, pubkey, endian) {
-        return ECDSA().set({
+        // NOTE: `new` is REQUIRED — see the note on `static sign` above.
+        return new ECDSA().set({
             hashbuf: hashbuf,
             endian: endian,
             sig: sig,

@@ -1,6 +1,6 @@
 {
   "name": "@evonext/crypto",
-  "version": "25.11.25",
+  "version": "26.9.20",
   "description": "Suite of useful cryptographic functions for decentralized applications.",
   "main": "index.js",
   "repository": "https://github.com/sansbank/evonext-js",
